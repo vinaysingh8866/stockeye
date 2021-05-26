@@ -1,0 +1,12 @@
+{
+  "name": "stockeye",
+  "displayName": "stockeye",
+  "expo": {
+    "name": "stockeye",
+    "slug": "stockeye",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
