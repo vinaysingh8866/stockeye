@@ -1,21 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, Text, StyleSheet, View, SafeAreaView } from 'react-native';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Dimensions } from "react-native";
+import Backgroud from './components/Backgroud';
+import {LineCartBar} from './components/LineCartBar'
 
-export default function App() {
+
+
+
+
+
+var width = Dimensions.get('window').width; //full width
+var height = Dimensions.get('window').height; //full height
+const uri = 'https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png';
+
+const data = {
+  x: [1, 2, 3, 4, 5],
+  y: [1, 2, 3, 4, 8],
+  type: 'scatter',
+};
+
+const layout = { title: 'My cool chart!' }; 
+const App =() => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    
+    <SafeAreaView>
+    
+    <LineCartBar/>
+
+    <LineCartBar/>
+    
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
+  textLooks:{
+    color:'pink',
+    fontSize:50,
+
+  }
 });
+
+
+export default App;
