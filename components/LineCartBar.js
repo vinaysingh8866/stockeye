@@ -29,27 +29,20 @@ export class LineCartBar extends Component {
             height={100}
             withInnerLines={false}
             chartConfig={{
-
-              //backgroundColor: '#00FFFFFF',
-              backgroundGradientFrom: '#000000',
-              backgroundGradientTo: '#000000',
-              
+              backgroundColor: "rgba(200, 0, 0, 0)",
+              backgroundGradientFrom: "rgba(255, 255, 255, 0)",
+              backgroundGradientTo: "rgba(0, 0, 0, 0)",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {
-                
                 borderRadius: 16
-              
               }
-            
             }}
             bezier
             style={{
-
               marginVertical: 0,
               marginLeft:39/2,
               paddingRight: 0,
-
               borderRadius: 16
             }}
           />

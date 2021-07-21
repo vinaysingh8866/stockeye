@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, Text, StyleSheet, View, SafeAreaView } from 'react-native';
+import React, {useState} from 'react';
+import { Image, Text, StyleSheet, View, SafeAreaView, Slider } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Dimensions } from "react-native";
@@ -8,10 +8,19 @@ import {LineCartBar} from './components/LineCartBar'
 import {LoginPage} from './ui/LoginPage'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Portfolio} from './ui/Portfolio'
 
 
-
-
+const ShadowPropSlider = ({ label, value, ...props }) => {
+  return (
+    <>
+      <Text>
+        {label} ({value.toFixed(2)})
+      </Text>
+      <Slider step={1} value={value} {...props} />
+    </>
+  );
+};
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -48,12 +57,24 @@ const Tab = createBottomTabNavigator();
 
 const layout = { title: 'My cool chart!' }; 
 const App =() => {
+
   return (
     
 
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator 
+        tabBarOptions={{
+          activeTintColor: 'black',
+          inactiveTintColor: 'grey',
+          style: {
+            borderTopColor: '#66666666',
+            backgroundColor: '#F2F0F0',
+            elevation: 3,
+          },
+        }}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Portfolio" component={Portfolio} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
@@ -63,12 +84,25 @@ const App =() => {
 };
 
 const styles = StyleSheet.create({
-  textLooks:{
-    color:'pink',
-    fontSize:50,
-
-  }
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+  square: {
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    height: 150,
+    shadowColor: 'black',
+    width: 150,
+  },
+  controls: {
+    paddingHorizontal: 12,
+  },
 });
+
 
 
 export default App;
