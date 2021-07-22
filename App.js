@@ -75,7 +75,7 @@ const App =() => {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Portfolio" component={Portfolio} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="Login" component={LoginPage} />
       </Tab.Navigator>
     </NavigationContainer>
 
