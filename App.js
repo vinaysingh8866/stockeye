@@ -27,17 +27,6 @@ const ShadowPropSlider = ({ label, value, ...props }) => {
   );
 };
 
-
-const AppSwitchNavigator = createSwitchNavigator({
-  LoadingScreen: LoadingScreen,
-  LoginScreen: LoginScreen,
-  DashboardScreen: DashboardScreen
-})
-
-
-const AppNavigator = createAppContainer(AppSwitchNavigator);
-firebase.initializeApp(firebaseConfig)
-
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 const uri = 'https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png';
