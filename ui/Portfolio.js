@@ -4,7 +4,40 @@ import {PortfolioHeader} from '../components/PortfolioHeader'
 import {Tile} from '../components/Tile'
 import {TileSmall} from '../components/TileSmall'
 
-const DATA = [
+//await axios.get(`FAKE.come/api/?key=${key}`).then(
+  //function (response) {
+    // // handle success
+    // console.log(response);
+    // //);
+
+// const [DATA, setData] = useState([]);
+// try {
+//   const response = axios.get(`URLtoAPI/?Datetime=${curentdatetime}`);
+//   if(response.status === 200)
+//   {
+
+//     console.log('YAY');
+//     setData(response.data);
+
+//   }
+// } catch (error){ 
+
+//   console.log('There was an error: ', error);
+
+// }
+// finally{
+
+//  loadGraph();
+
+// }
+// 
+// Redux Store 
+// Axios
+
+
+
+
+    const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     title: ' Item',
@@ -20,15 +53,16 @@ const DATA = [
 ];
 
 const renderItem = ({ item }) => (
+
 <TouchableOpacity>
   <View style={{width:150,height:100,backgroundColor:'#F2F0F0',marginLeft:10, marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
     <View style={{width:'100%',height:'100%',backgroundColor:'#F2F0F0',borderRadius:16, shadowColor:'white',shadowRadius:1,shadowOffset:{width:-3, height:-3},shadowOpacity:3}}>
       <Text style={{textAlign:'center'}}>{item.title}</Text>
     </View>
   </View>
-  </TouchableOpacity>
+</TouchableOpacity>
 
-  //<TileSmall name={item.title} />
+//<TileSmall name={item.title}/>
 );
 
 export class Portfolio extends Component {
@@ -51,8 +85,6 @@ export class Portfolio extends Component {
                   showsHorizontalScrollIndicator={false}
                 />
                 </View>
-                
-                
             </SafeAreaView>
         )
     }

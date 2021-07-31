@@ -8,7 +8,7 @@ export class LoginPage extends Component {
     render() {
        
         return (
-            <View style={styles.container}>
+        <View style={styles.container}>
    
         <StatusBar style="auto" />
         <View style={styles.inputView}>

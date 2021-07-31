@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+ import React, {useState, useEffect} from 'react';
+ import ReactDOM from 'react-dom';
 import { Image, Text, StyleSheet, View, SafeAreaView, Slider } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -78,8 +79,6 @@ const App =() => {
         <Tab.Screen name="Login" component={LoginPage} />
       </Tab.Navigator>
     </NavigationContainer>
-
-    
   );
 };
 
@@ -102,7 +101,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
 });
-
-
-
 export default App;
+
