@@ -14,18 +14,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Portfolio} from './ui/Portfolio'
 import * as firebase from 'firebase'
 import { firebaseConfig } from './config';
+import HomePage from './ui/HomePage';
 
 
-const ShadowPropSlider = ({ label, value, ...props }) => {
-  return (
-    <>
-      <Text>
-        {label} ({value.toFixed(2)})
-      </Text>
-      <Slider step={1} value={value} {...props} />
-    </>
-  );
-};
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -37,17 +28,7 @@ const data = {
   type: 'scatter',
 };
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      
-    <SafeAreaView>
-    <LineCartBar/>
-    <LineCartBar/>
-    </SafeAreaView>
-    </View>
-  );
-}
+
 
 function SettingsScreen() {
   return (
@@ -78,7 +59,7 @@ const App =() => {
           },
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Portfolio" component={Portfolio} />
         <Tab.Screen name="Login" component={LoginPage} />
       </Tab.Navigator>
