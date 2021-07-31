@@ -7,9 +7,13 @@ import { Dimensions } from "react-native";
 import Backgroud from './components/Backgroud';
 import {LineCartBar} from './components/LineCartBar'
 import {LoginPage} from './ui/LoginPage'
+import { LoadingScreen } from './ui/LoadingScreen.js'
+//import { DashboardScreen } from './ui/DashboardScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Portfolio} from './ui/Portfolio'
+import * as firebase from 'firebase'
+import { firebaseConfig } from './config';
 
 
 const ShadowPropSlider = ({ label, value, ...props }) => {
@@ -22,6 +26,17 @@ const ShadowPropSlider = ({ label, value, ...props }) => {
     </>
   );
 };
+
+
+const AppSwitchNavigator = createSwitchNavigator({
+  LoadingScreen: LoadingScreen,
+  LoginScreen: LoginScreen,
+  DashboardScreen: DashboardScreen
+})
+
+
+const AppNavigator = createAppContainer(AppSwitchNavigator);
+firebase.initializeApp(firebaseConfig)
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height

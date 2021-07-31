@@ -5,6 +5,76 @@ import { StyleSheet, Text, View, Image, TextInput,
 
 export class LoginPage extends Component {
      
+
+    isUserEqual = (googleUser, firebaseUser) => {
+        if (firebaseUser) {
+            var providerData = firebaseUser.providerData;
+            for (var i = 0; i < providerData.length; i++) {
+                if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+                    providerData[i].uid === googleUser.getBasicProfile().getId()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    onSignIn = (googleUser) => {
+        console.log('Google Auth Response', googleUser);
+        var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+            unsubscribe();
+            if (!this.isUserEqual(googleUser, firebaseUser)) {
+                var credential = firebase.auth.GoogleAuthProvider.credential(
+                    googleUser.idToken, googleUser.accessToken);
+                firebase.auth().signInWithCredential(credential)
+                    .then(res = (result) => {
+
+                        firebase.database()
+                            .ref('/users/' + result.user.uid)
+                            .set({
+                                gmail: result.user.email,
+                                profilePicture: result.additionalUserInfo.ptofile.picture
+                            })
+                    })
+                    .catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        var email = error.email;
+                        var credential = error.credential;
+                    });
+            
+                } else {
+
+                console.log('User already signed-in Firebase.');
+            
+            }
+        });
+    }
+
+    signInWithGoogleAsync = async () => {
+        try {
+            const result = await Google.logInAsync({
+                behavior: 'web',
+                //androidClientId: 'YOUR_CLIENT_ID_HERE',
+                iosClientId: '532640532418-8etm53k0oi3t8p5cv59jmlulgneb4is2.apps.googleusercontent.com',
+                scopes: ['profile', 'email'],
+            });
+
+            if (result.type === 'success') {
+
+
+                this.onSignIn(result)
+
+
+                return result.accessToken;
+            } else {
+                return { cancelled: true };
+            }
+        } catch (e) {
+            alert(e)
+            return { error: true };
+        }
+    }
     render() {
        
         return (
@@ -29,6 +99,12 @@ export class LoginPage extends Component {
             onChangeText={(password) => setPassword(password)}
           />
         </View>
+
+        <View style={styles.container}>
+                <Button
+                    title='Sign In With Google'
+                    onPress={() => this.signInWithGoogleAsync()} />
+            </View>
    
         <TouchableOpacity>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
@@ -38,7 +114,7 @@ export class LoginPage extends Component {
           <Text style={styles.loginText}>SIGNIN</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.signupBtn}>
+        <TouchableOpacity style={styles. signupBtn}>
           <Text style={styles.loginText}>SIGNUP</Text>
         </TouchableOpacity>
       </View>
@@ -100,5 +176,13 @@ const styles = StyleSheet.create({
         marginTop: 40,
         backgroundColor: "#FF1493",
       },
+
+     
+        container: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
   });
 
