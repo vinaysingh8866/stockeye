@@ -15,6 +15,7 @@ import {Portfolio} from './ui/Portfolio'
 import * as firebase from 'firebase'
 import { firebaseConfig } from './config';
 import HomePage from './ui/HomePage';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 
 
