@@ -104,7 +104,7 @@ export class LoginPage extends Component {
                 <Button
                     title='Sign In With Google'
                     onPress={() => this.signInWithGoogleAsync()} />
-            </View>
+        </View>
    
         <TouchableOpacity>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
