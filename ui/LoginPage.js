@@ -85,7 +85,7 @@ export class LoginPage extends Component {
           <TextInput
             style={styles.TextInput}
             placeholder="Email."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="blue"
             onChangeText={(email) => setEmail(email)}
           />
         </View>
@@ -94,29 +94,28 @@ export class LoginPage extends Component {
           <TextInput
             style={styles.TextInput}
             placeholder="Password."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="blue"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
           />
         </View>
-
-        <View style={styles.container}>
-                <Button
-                    title='Sign In With Google'
-                    onPress={() => this.signInWithGoogleAsync()} />
-            </View>
-   
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
    
         <TouchableOpacity style={styles.loginBtn}>
           <Text style={styles.loginText}>SIGNIN</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity>
+          <Text style={styles.forgot_button}>Forgot Password?</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles. signupBtn}>
           <Text style={styles.loginText}>SIGNUP</Text>
         </TouchableOpacity>
+        <View style={styles.container}>
+                <Button
+                    title='Sign In With Google'
+                    onPress={() => this.signInWithGoogleAsync()} />
+            </View>
       </View>
         )
     }
@@ -126,7 +125,7 @@ export default LoginPage
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor:'#F2F0F0',
       alignItems: "center",
       justifyContent: "center",
     },
@@ -136,51 +135,68 @@ const styles = StyleSheet.create({
     },
    
     inputView: {
-      backgroundColor: "#FFC0CB",
-      borderRadius: 30,
-      width: "70%",
+      
+      width: "30%",
       height: 45,
-      marginBottom: 20,
+      marginBottom:10,marginTop:20,
+      borderRadius:16,
+      shadowColor:'blue',
+      shadowRadius:1,
+      shadowOffset:{width:3, height:3},
+      shadowOpacity:.1,
    
-      alignItems: "center",
+      alignItems:"",
     },
    
     TextInput: {
-      height: 50,
+      height: 30,
+    
       flex: 1,
       padding: 10,
       marginLeft: 20,
+      alignItems: "strech"
     },
    
     forgot_button: {
       height: 30,
-      marginBottom: 30,
+      marginTop: 60,
+      marginBottom: 20,
+    
+      
     },
    
     loginBtn: {
-      width: "80%",
+      width: "15%",
       borderRadius: 25,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#FF1493",
+      backgroundColor: "0000A5",
+      shadowColor:'blue',
+      shadowRadius:1,
+      shadowOffset:{width:3, height:3},
+      shadowOpacity:.1,
     },
 
     signupBtn: {
-        width: "80%",
+        width: "15%",
         borderRadius: 25,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#FF1493",
+        backgroundColor: "0000A5",
+        shadowColor:'blue',
+        shadowRadius:1,
+        shadowOffset:{width:3, height:3},
+        shadowOpacity:.1,
       },
 
      
         container: {
             flex: 1,
-            backgroundColor: '#fff',
+            backgroundColor:'#F2F0F0',
             alignItems: 'center',
             justifyContent: 'center',
         },
