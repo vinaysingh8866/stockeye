@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
       shadowOffset:{width:3, height:3},
       shadowOpacity:.1,
    
-      alignItems:"",
+      alignItems:"center",
     },
    
     TextInput: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 10,
       marginLeft: 20,
-      alignItems: "strech"
+      alignItems: "stretch"
     },
    
     forgot_button: {
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "0000A5",
+      backgroundColor: "#0000A5",
       shadowColor:'blue',
       shadowRadius:1,
       shadowOffset:{width:3, height:3},
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "0000A5",
+        backgroundColor: "#0000A5",
         shadowColor:'blue',
         shadowRadius:1,
         shadowOffset:{width:3, height:3},
