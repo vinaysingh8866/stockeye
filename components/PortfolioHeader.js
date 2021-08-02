@@ -11,6 +11,7 @@ export class PortfolioHeader extends Component {
             <View style={{ 
                 //backgroundColor:'#F2F0F0', 
                 marginLeft:'5%', 
+                paddingTop:10,
                 width:'90%', 
                 height:200, 
                 borderRadius:16,
