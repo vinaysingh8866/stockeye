@@ -29,33 +29,46 @@ const data = {
   type: 'scatter',
 };
 
+const screenOptions = (route, color) => {
+  let iconName;
 
+  switch (route.name) {
+    case 'Home':
+      iconName = 'home';
+      break;
+    case 'Login':
+      iconName = 'appstore-o';
+      break;
+    case 'Portfolio':
+      iconName = 'folder1';
+      break;
+    default:
+      break;
+  }
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+  return <Icon name={iconName} color={color} size={24} />;
+};
 
 const Tab = createBottomTabNavigator();
-
-
-const layout = { title: 'My cool chart!' }; 
 const App =() => {
 
   return (
-    
-
     <NavigationContainer>
       <Tab.Navigator 
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color}) => screenOptions(route, color),
+      })}
         tabBarOptions={{
           activeTintColor: 'black',
           inactiveTintColor: 'grey',
           style: {
+            width:'80%',
+            height:60,
+            marginBottom:10,
+            marginStart:'10%',
             borderTopColor: '#66666666',
-            backgroundColor: '#F2F0F0',
+            backgroundColor: '#ecf0f1',
+            borderRadius:16,
             elevation: 3,
           },
         }}
