@@ -1,12 +1,100 @@
-import React, { Component } from 'react'
+import React, { Component,useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput,
-    Button, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity} from 'react-native';
+import * as Google from 'expo-google-app-auth';
+import firebase from 'firebase';
+import {LoadingScreen} from './LoadingScreen'
+
+
+
+
+
+
+
+const NameText = () => {
+  const [email, setEmail] = useState('');
+  return (
+    <View style={{ 
+      //backgroundColor:'#F2F0F0', 
+      marginLeft:'5%', 
+      paddingTop:10,
+      width:'90%', 
+      height:70, 
+      borderRadius:16,
+      shadowColor:'black',
+      marginVertical:10,
+      shadowRadius:1,
+      shadowOffset:{width:3, height:3},
+      shadowOpacity:.1}
+      }>
+    <View style={{ 
+      backgroundColor:'#F2F0F0', 
+      //marginLeft:'5%', 
+      width:'100%', 
+      height:'100%', 
+      borderRadius:16,
+      shadowColor:'white',
+      shadowRadius:1,
+      shadowOffset:{width:-3, height:-3},
+      shadowOpacity:3}
+      }>
+    <TextInput
+              style={styles.TextInput}
+              placeholder="Email."
+              placeholderTextColor="black"
+              onChangeText={(email) => setEmail(email)}
+            />
+    </View>
+    </View>
+  )
+}
+const PassText = () => {
+  const [pass, setPass] = useState('');
+  return (
+    <View style={{ 
+      //backgroundColor:'#F2F0F0', 
+      marginLeft:'5%', 
+      paddingTop:10,
+      width:'90%', 
+      height:70, 
+      borderRadius:16,
+      shadowColor:'black',
+      marginVertical:10,
+      shadowRadius:1,
+      shadowOffset:{width:3, height:3},
+      shadowOpacity:.1}
+      }>
+
+      <View style={{ 
+        backgroundColor:'#F2F0F0', 
+        //marginLeft:'5%', 
+        width:'100%', 
+        height:'100%', 
+        borderRadius:16,
+        shadowColor:'white',
+        shadowRadius:1,
+        shadowOffset:{width:-3, height:-3},
+        shadowOpacity:3}
+        }>
+
+        <TextInput
+                  style={styles.TextInput}
+                  placeholder="Password."
+                  placeholderTextColor="black"
+                  secureTextEntry={true}
+                  onChangeText={(pass) => setPass(pass)}
+                />
+
+      </View>
+    </View>
+  )
+}
+
+
+
 
 export class LoginPage extends Component {
-     
-
-    isUserEqual = (googleUser, firebaseUser) => {
+      isUserEqual = (googleUser, firebaseUser) => {
         if (firebaseUser) {
             var providerData = firebaseUser.providerData;
             for (var i = 0; i < providerData.length; i++) {
@@ -76,52 +164,95 @@ export class LoginPage extends Component {
         }
     }
     render() {
-       
+      
         return (
+        
         <View style={styles.container}>
-   
-        <StatusBar style="auto" />
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Email."
-            placeholderTextColor="blue"
-            onChangeText={(email) => setEmail(email)}
-          />
-        </View>
-   
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Password."
-            placeholderTextColor="blue"
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-          />
-        </View>
-   
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>SIGNIN</Text>
-        </TouchableOpacity>
+          <StatusBar style="auto" />
 
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
+          <View style={styles.inputView}>
+            <NameText/>
+          </View>
+    
+          <View style={styles.inputView}>
+            <PassText/>
+          </View>
+          
+          <TouchableOpacity 
+          onPress={() => this.signInWithGoogleAsync()}>
+          <View style={{ 
+              //backgroundColor:'#F2F0F0', 
+              marginLeft:'5%', 
+              paddingTop:10,
+              width:'120%', 
+              height:70, 
+              borderRadius:16,
+              shadowColor:'black',
+              marginVertical:60,
+              
+              shadowRadius:1,
+              shadowOffset:{width:3, height:3},
+              shadowOpacity:.1}
+              }>
 
-        <TouchableOpacity style={styles. signupBtn}>
-          <Text style={styles.loginText}>SIGNUP</Text>
-        </TouchableOpacity>
-        <View style={styles.container}>
-                <Button
-                    title='Sign In With Google'
-                    onPress={() => this.signInWithGoogleAsync()} />
+                <View style={{ 
+                  backgroundColor:'#F2F0F0', 
+                  //marginLeft:'5%',
+                  flex:1,
+                  alignItems:'center',
+                  width:'100%', 
+                  height:'100%', 
+                  borderRadius:16,
+                  shadowColor:'white',
+                  shadowRadius:1,
+                  shadowOffset:{width:-3, height:-3},
+                  shadowOpacity:3}
+                  }>
+
+                <Text style={{width:150,paddingVertical:20, paddingHorizontal:50}}>Sign In</Text>
+
+              </View>
             </View>
-      </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+          <View style={{ 
+              //backgroundColor:'#F2F0F0', 
+              marginLeft:'5%', 
+              paddingTop:10,
+              width:'120%', 
+              height:70, 
+              borderRadius:16,
+              shadowColor:'black',
+              
+              
+              shadowRadius:1,
+              shadowOffset:{width:3, height:3},
+              shadowOpacity:.1}
+              }>
+
+                <View style={{ 
+                  backgroundColor:'#F2F0F0', 
+                  //marginLeft:'5%', 
+                  width:'100%', 
+                  height:'100%', 
+                  borderRadius:16,
+                  shadowColor:'white',
+                  shadowRadius:1,
+                  shadowOffset:{width:-3, height:-3},
+                  shadowOpacity:3}
+                  }>
+            <Text style={{padding:20,width:150}}>Forgot Password?</Text>
+            </View>
+            </View>
+            
+          </TouchableOpacity>
+        </View>
         )
     }
 }
 
-export default LoginPage
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -136,9 +267,9 @@ const styles = StyleSheet.create({
    
     inputView: {
       
-      width: "30%",
+      width: "80%",
       height: 45,
-      marginBottom:10,marginTop:20,
+      marginBottom:10,marginTop:100,
       borderRadius:16,
       shadowColor:'blue',
       shadowRadius:1,
@@ -166,13 +297,13 @@ const styles = StyleSheet.create({
     },
    
     loginBtn: {
-      width: "15%",
+      width: "35%",
       borderRadius: 25,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#0000A5",
+      backgroundColor: "#F2F0F0",
       shadowColor:'blue',
       shadowRadius:1,
       shadowOffset:{width:3, height:3},
@@ -180,13 +311,14 @@ const styles = StyleSheet.create({
     },
 
     signupBtn: {
-        width: "15%",
+        width: "35%",
         borderRadius: 25,
         height: 50,
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#0000A5",
+        marginBottom:50,
+        backgroundColor: "#F2F0F0",
         shadowColor:'blue',
         shadowRadius:1,
         shadowOffset:{width:3, height:3},

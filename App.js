@@ -1,8 +1,9 @@
- import React, {useState, useEffect} from 'react';
+ import React, {useState, useEffect, Component} from 'react';
  import ReactDOM from 'react-dom';
 import { Image, Text, StyleSheet, View, SafeAreaView, Slider } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Dimensions } from "react-native";
 import Backgroud from './components/Backgroud';
 import {LineCartBar} from './components/LineCartBar'
@@ -49,36 +50,109 @@ const screenOptions = (route, color) => {
   return <Icon name={iconName} color={color} size={24} />;
 };
 
-const Tab = createBottomTabNavigator();
-const App =() => {
+checkIfLoggedIn = () => {
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
 
-  return (
-    <NavigationContainer>
+          this.props.navigation.navigate('Home')
+
+      } else {
+
+          this.props.navigation.navigate('LoginScreen')
+
+      }
+  }.bind(this))
+}
+
+
+firebase.initializeApp(firebaseConfig)
+const Tab = createBottomTabNavigator();
+
+
+
+
+
+
+
+
+
+export class Dash extends Component {
+  render() {
+    return (
+      <View style={{height:'100%', width:'100%'}}>
+        <NavigationContainer style={{backgroundColor:'#F2F0F0'}}>
       <Tab.Navigator 
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => screenOptions(route, color),
       })}
-      barStyle={{ backgroundColor: '#F2F0F0' }}
         tabBarOptions={{
           activeTintColor: 'black',
           inactiveTintColor: 'grey',
+          activeBackgroundColor: '#F2F0F0',
+          inactiveBackgroundColor: '#F2F0F0',
           style: {
             width:'80%',
-            height:60,
-            marginBottom:10,
+            height:50,
+            marginBottom:20,
+            marginTop:20,
+            paddingTop:6,
+            paddingLeft:6,
+            paddingRight:6,
             marginStart:'10%',
-            borderTopColor: '#66666666',
+            paddingBottom: 6,
+            //borderTopColor: '#66666666',
             backgroundColor: '#F2F0F0',
             borderRadius:16,
             elevation: 3,
+            shadowColor:'white',
+            shadowRadius:1,
+            shadowOffset:{width:-3, height:-3},
+            shadowOpacity:3,
+            shadowColor:'black',
+            shadowRadius:1,
+            shadowOffset:{width:3, height:3},
+            shadowOpacity:0.09
           },
         }}
       >
         <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Portfolio" component={Portfolio} />
         <Tab.Screen name="Login" component={LoginPage} />
+
       </Tab.Navigator>
     </NavigationContainer>
+      </View>
+    )
+  }
+}
+
+
+const AppSwitchNavigator = createSwitchNavigator({
+  LoadingScreen: LoadingScreen,
+  LoginScreen: LoginPage,
+  DashboardScreen: Dash
+})
+
+
+const AppNavigator = createAppContainer(AppSwitchNavigator);
+
+const App =() => {  
+  return (
+
+
+
+    <View style={{width:'100%', height:'100%', backgroundColor:'#F2F0F0'}}>
+
+
+
+
+
+    <AppNavigator/>
+
+
+
+
+    </View>
   );
 };
 
