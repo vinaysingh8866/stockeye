@@ -168,7 +168,7 @@ const AppNavigator = createAppContainer(AppSwitchNavigator);
 const App =() => {  
   return (
     <View style={{width:'100%', height:'100%', backgroundColor:'#F2F0F0'}}>
-    <AppNavigator/>
+    <Dash/>
     </View>
   );
 };
