@@ -4,7 +4,9 @@ import ModalAdd from '../components/ModalAdd';
 
 
 
-
+function updateText2(text) {
+    this.setState({ text })
+}
 export class StrategyPage extends Component {
     constructor(props) {
         super(props);
@@ -13,9 +15,11 @@ export class StrategyPage extends Component {
           isModalVisible:false,
           inputValue:""
         };
+        updateText2 = updateText2.bind(this)
       }
-
-
+      updateText2 = (text) => {
+        this.setState({ text })
+    }
 
       
     render() {
@@ -61,10 +65,10 @@ export class StrategyPage extends Component {
                             </View>
                         </View>
                     <View>
-                        <ModalAdd/>
+                        <ModalAdd updateTextCB={this.updateText1}/>
                     </View>
                 </View>
-
+                <Text>OKOK{this.state.inputValue}</Text>
                 
             
             </SafeAreaView>

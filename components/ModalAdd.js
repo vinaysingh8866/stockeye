@@ -1,22 +1,26 @@
-import React ,{useState}from 'react'
-import { View, Text, Modal,TextInput, Button, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import React ,{Component,useState}from 'react'
+import { View, Text, Modal,TextInput, Button, StyleSheet, Dimensions, TouchableOpacity,  } from 'react-native'
 const { width } = Dimensions.get("window");
 
-const ModalAdd = () => {
-    const [isModalVisible, setModalVisible] = useState(false);
-  
-    // This is to manage TextInput State
-    const [inputValue, setInputValue] = useState("");
-  
-    // Create toggleModalVisibility function that will
-    // Open and close modal upon button clicks.
-    const toggleModalVisibility = () => {
-        setModalVisible(!isModalVisible);
-    };
-    return (
+function updateText2(text) {
+    this.setState({ text })
+}
+
+export class ModalAdd extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isModalVisible:false,
+          inputValue:""
+        };
+      }
+    render() {
+        const toggleModalVisibility = () => {
+            this.setState({...this,isModalVisible:!this.state.isModalVisible})
+            
+        };
+        return (
             <View>
-  
-            {/**  We are going to create a Modal with Text Input. */}
             <TouchableOpacity onPress={toggleModalVisibility}>
                             <View style={{ 
                                 width:100,
@@ -44,30 +48,35 @@ const ModalAdd = () => {
                                     shadowOffset:{width:-3, height:-3},
                                     shadowOpacity:3,
                                     alignItems:'center'
-                                
                                     }}> 
                                     <Text style={{paddingTop:15}}>ADD</Text>
                                 </View>
                             </View>
             </TouchableOpacity>
             <Modal animationType="slide" 
-                   transparent visible={isModalVisible} 
+                   transparent visible={this.state.isModalVisible} 
                    presentationStyle="overFullScreen" 
                    onDismiss={toggleModalVisibility}>
                 <View style={styles.viewWrapper}>
                     <View style={styles.modalView}>
                         <TextInput placeholder="Enter something..." 
-                                   value={inputValue} style={styles.textInput} 
-                                   onChangeText={(value) => setInputValue(value)} />
-  
-                        {/** This button is responsible to close the modal */}
+                                   value={this.state.inputValue} style={styles.textInput} 
+                                   onChange={(e) => this.setState({...this,inputValue:e.target.value})} />
                         <Button title="Close" onPress={toggleModalVisibility} />
                     </View>
                 </View>
             </Modal>
             </View>
-    )
+        )
+    }
 }
+
+export default ModalAdd
+
+
+
+
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
@@ -105,4 +114,4 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
 });
-export default ModalAdd
+
