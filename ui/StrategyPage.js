@@ -1,25 +1,22 @@
 import React, { Component, useState } from 'react'
-import { Text, View, SafeAreaView, StyleSheet, Picker, Button, TouchableOpacity, Modal, TextInput } from 'react-native'
+import { Text, View, SafeAreaView, StyleSheet, Picker, Button, TouchableOpacity, Modal, TextInput, Alert } from 'react-native'
 import ModalAdd from '../components/ModalAdd';
 
 
 
-function updateText2(text) {
-    this.setState({ text })
-}
+
 export class StrategyPage extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
           value: "MACD",
           isModalVisible:false,
-          inputValue:""
+          text:"j;bnjn"
         };
-        updateText2 = updateText2.bind(this)
+        
       }
-      updateText2 = (text) => {
-        this.setState({ text })
-    }
+      
 
       
     render() {
@@ -56,7 +53,7 @@ export class StrategyPage extends Component {
                             <Picker
                                 selectedValue={this.state.value}
                                 style={{ height: 50, width: 150 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({...this,value: itemValue})}
+                                onValueChange={(itemValue, itemIndex) => this.setState({value: itemValue})}
                                 >
                                 <Picker.Item label="RSI" value="RSI" />
                                 <Picker.Item label="BBP" value="BBP" />
@@ -65,10 +62,10 @@ export class StrategyPage extends Component {
                             </View>
                         </View>
                     <View>
-                        <ModalAdd updateTextCB={this.updateText1}/>
+                        <ModalAdd/>
                     </View>
                 </View>
-                <Text>OKOK{this.state.inputValue}</Text>
+                <Text>OKOK{this.state.text}</Text>
                 
             
             </SafeAreaView>
