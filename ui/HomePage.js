@@ -41,6 +41,43 @@ const DATA = [
     <View style={{width:150,height:100,backgroundColor:'#F2F0F0',marginLeft:10, marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
       <View style={{width:'100%',height:'100%',backgroundColor:'#F2F0F0',borderRadius:16, shadowColor:'white',shadowRadius:1,shadowOffset:{width:-3, height:-3},shadowOpacity:3}}>
         <Text style={{textAlign:'center'}}>{item.title}</Text>
+        <LineChart
+                    data={{
+                    //labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        data: [
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100,
+                        Math.random() * 100
+                        ]
+                    }]
+                    }}
+                    width={ 100 } // from react-native
+                    height={ 70 }
+                    withInnerLines={ false }
+                    chartConfig={{
+                        backgroundColor: '#00FFFF',
+                        backgroundGradientFrom: '#F2F0F0',
+                        backgroundGradientTo: '#F2F0F0',
+                        decimalPlaces: 2, // optional, defaults to 2dp
+                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                        style: {
+                            borderRadius: 16
+                        }
+                    }}
+                    bezier
+                    style={{
+                        marginVertical: '3%',
+                        marginLeft: 10,
+                        //paddingLeft:30,
+                        paddingRight: 0,
+                        //paddingBottom:0,
+                        borderRadius: 16
+                    }}
+                />
       </View>
     </View>
   </TouchableOpacity>
