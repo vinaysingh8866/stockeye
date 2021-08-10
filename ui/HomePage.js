@@ -3,23 +3,38 @@ import { Text, View, SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from
 import {PortfolioHeader} from '../components/PortfolioHeader'
 import {Tile} from '../components/Tile'
 import {TileSmall} from '../components/TileSmall'
-
+import {TabTile} from '../components/TabTile'
 const DATA = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: ' Item',
+      id: '1',
+      title: 'APPL',
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: ' ',
+      id: '2',
+      title: 'GOGL',
     },
     {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
+      id: '3',
+      title: 'TSLA',
+    },
+  ];
+
+  const DATAa = [
+    {
+      id: '1',
+      title: 'S&P',
+    },
+    {
+      id: '2',
+      title: 'BTC',
+    },
+    {
+      id: '3',
+      title: 'ETH',
     },
   ];
   
-  const renderItem = ({ item }) => (
+  const smallTile = ({ item }) => (
   
   <TouchableOpacity>
     <View style={{width:150,height:100,backgroundColor:'#F2F0F0',marginLeft:10, marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
@@ -32,20 +47,46 @@ const DATA = [
   //<TileSmall name={item.title}/>
   );
 
+  const bigTile = ({ item }) => (
+  
+    <TouchableOpacity>
+      <View style={{width:150,height:130,backgroundColor:'#F2F0F0',marginLeft:10, marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
+        <View style={{width:'100%',height:'100%',backgroundColor:'#F2F0F0',borderRadius:16, shadowColor:'white',shadowRadius:1,shadowOffset:{width:-3, height:-3},shadowOpacity:3}}>
+          <Text style={{textAlign:'center'}}>{item.title}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+    
+    //<TileSmall name={item.title}/>
+    );
+
+    
+    
 const HomePage = () => {
     return (
         <SafeAreaView style={{backgroundColor:'#F2F0F0'}}>
                 <PortfolioHeader/>
-                <Text style={styles.headingText}>Top Performing</Text>
-                <Tile/>
+                <Text style={ {padding:20},styles.headingText}>Top Performing</Text>
+                <FlatList
+                  style={{marginLeft:'3%'}}
+                  horizontal
+                  //horizontal={true}
+                  data={DATAa}
+                  renderItem={bigTile}
+                  keyExtractor={item => item.id}
+                  showsHorizontalScrollIndicator={false}
+                />
+                
                 <Text style={styles.headingText}>Patterns Detected</Text>
+                <Tile/>
+                  
                 <View>
                 <FlatList
                   style={{marginLeft:'3%'}}
                   horizontal
                   //horizontal={true}
                   data={DATA}
-                  renderItem={renderItem}
+                  renderItem={smallTile}
                   keyExtractor={item => item.id}
                   showsHorizontalScrollIndicator={false}
                 />

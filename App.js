@@ -1,6 +1,6 @@
  import React, {useState, useEffect, Component} from 'react';
  import ReactDOM from 'react-dom';
-import { Image, Text, StyleSheet, View, SafeAreaView, Slider } from 'react-native';
+import { Image, Text, StyleSheet, View, SafeAreaView,TouchableOpacity, Slider } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -17,6 +17,7 @@ import * as firebase from 'firebase'
 import { firebaseConfig } from './config';
 import HomePage from './ui/HomePage';
 import Icon from 'react-native-vector-icons/AntDesign';
+import StrategyPage from './ui/StrategyPage';
 
 
 
@@ -37,7 +38,7 @@ const screenOptions = (route, color) => {
     case 'Home':
       iconName = 'home';
       break;
-    case 'Login':
+    case 'Strategy':
       iconName = 'appstore-o';
       break;
     case 'Portfolio':
@@ -49,6 +50,7 @@ const screenOptions = (route, color) => {
 
   return <Icon name={iconName} color={color} size={24} />;
 };
+
 
 checkIfLoggedIn = () => {
   firebase.auth().onAuthStateChanged(function (user) {
@@ -70,6 +72,27 @@ const Tab = createBottomTabNavigator();
 
 
 
+const myStyle = {
+  width:'80%',
+  height:50,
+  marginBottom:20,
+  marginTop:20,
+  paddingTop:6,
+  paddingLeft:6,
+  paddingRight:6,
+  marginStart:'10%',
+  paddingBottom: 6,
+  //borderTopColor: '#66666666',
+  backgroundColor: '#F2F0F0',
+  borderRadius:16,
+  elevation: 3,
+  shadowOpacity:3,
+  shadowColor:'black',
+  shadowRadius:2,
+  shadowOffset:{width:0, height:0},
+  shadowOpacity:0.09
+}
+
 
 
 
@@ -79,49 +102,55 @@ const Tab = createBottomTabNavigator();
 export class Dash extends Component {
   render() {
     return (
-      <View style={{height:'100%', width:'100%'}}>
-        <NavigationContainer style={{backgroundColor:'#F2F0F0'}}>
-      <Tab.Navigator 
-      screenOptions={({route}) => ({
-        tabBarIcon: ({color}) => screenOptions(route, color),
-      })}
-        tabBarOptions={{
-          activeTintColor: 'black',
-          inactiveTintColor: 'grey',
-          activeBackgroundColor: '#F2F0F0',
-          inactiveBackgroundColor: '#F2F0F0',
-          style: {
-            width:'80%',
-            height:50,
-            marginBottom:20,
-            marginTop:20,
-            paddingTop:6,
-            paddingLeft:6,
-            paddingRight:6,
-            marginStart:'10%',
-            paddingBottom: 6,
-            //borderTopColor: '#66666666',
-            backgroundColor: '#F2F0F0',
-            borderRadius:16,
-            elevation: 3,
-            shadowColor:'white',
-            shadowRadius:1,
-            shadowOffset:{width:-3, height:-3},
-            shadowOpacity:3,
-            shadowColor:'black',
-            shadowRadius:1,
-            shadowOffset:{width:3, height:3},
-            shadowOpacity:0.09
-          },
-        }}
-      >
+        <NavigationContainer>
+          <Tab.Navigator 
+          screenOptions={({route}) => ({
+            tabBarIcon: ({color}) => screenOptions(route, color),
+          })}
+
+            tabBarOptions={{
+              activeTintColor: 'black',
+              inactiveTintColor: 'grey',
+              activeBackgroundColor: '#F2F0F0',
+              inactiveBackgroundColor: '#F2F0F0',
+
+              tabStyle: {
+                shadowColor:'green',
+                shadowRadius:1,
+                shadowOffset:{width:-3, height:-3},
+              },
+              style: {
+                width:'80%',
+                height:50,
+                marginBottom:20,
+                marginTop:20,
+                paddingTop:6,
+                paddingLeft:6,
+                paddingRight:6,
+                marginStart:'10%',
+                paddingBottom: 6,
+                //borderTopColor: '#66666666',
+                backgroundColor: '#F2F0F0',
+                borderRadius:16,
+                elevation: 3,
+                shadowOpacity:3,
+                shadowColor:'black',
+                shadowRadius:2,
+                shadowOffset:{width:0, height:0},
+                shadowOpacity:0.2
+              },
+            }}
+          >
+            
         <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Portfolio" component={Portfolio} />
-        <Tab.Screen name="Login" component={LoginPage} />
+        <Tab.Screen name="Strategy" component={StrategyPage} />
 
       </Tab.Navigator>
+      
     </NavigationContainer>
-      </View>
+    
+    
     )
   }
 }
@@ -138,20 +167,8 @@ const AppNavigator = createAppContainer(AppSwitchNavigator);
 
 const App =() => {  
   return (
-
-
-
     <View style={{width:'100%', height:'100%', backgroundColor:'#F2F0F0'}}>
-
-
-
-
-
     <AppNavigator/>
-
-
-
-
     </View>
   );
 };
