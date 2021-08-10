@@ -73,7 +73,7 @@ const DATA = [
                         marginVertical: '3%',
                         marginLeft: 10,
                         //paddingLeft:30,
-                        paddingRight: 0,
+                        paddingRight: -10,
                         //paddingBottom:0,
                         borderRadius: 16
                     }}
@@ -112,8 +112,9 @@ const DATA = [
                         backgroundColor: '#00FFFF',
                         backgroundGradientFrom: '#F2F0F0',
                         backgroundGradientTo: '#F2F0F0',
-                        decimalPlaces: 2, // optional, defaults to 2dp
+                        decimalPlaces: 0, // optional, defaults to 2dp
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                        
                         style: {
                             borderRadius: 16
                         }
@@ -123,7 +124,7 @@ const DATA = [
                         marginVertical: '3%',
                         marginLeft: 10,
                         //paddingLeft:30,
-                        paddingRight: 0,
+                        paddingRight: -10,
                         //paddingBottom:0,
                         borderRadius: 16
                     }}
