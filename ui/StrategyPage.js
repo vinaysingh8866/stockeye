@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Text, View, SafeAreaView, StyleSheet, Picker, Button, TouchableOpacity, Modal, TextInput, Alert, FlatList} from 'react-native'
 import ModalAdd from '../components/ModalAdd';
+import { LineChart } from 'react-native-chart-kit'
 
 const DATA = [
     {
@@ -37,7 +38,7 @@ const DATA = [
   const renderItem = ({ item }) => (
   
   <TouchableOpacity>
-    <View style={{width:'80%',height:60,backgroundColor:'#F2F0F0', marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
+    <View style={{width:'80%',height:60,backgroundColor:'#F2F0F0',marginBottom:10,marginTop:20,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
       <View style={{flexDirection:'row',flexWrap: "wrap",width:'100%',height:'100%',backgroundColor:'#F2F0F0',borderRadius:16, shadowColor:'white',shadowRadius:1,shadowOffset:{width:-3, height:-3},shadowOpacity:3}}>
         <Text style={{ fontSize:15, marginLeft:'10%',marginTop:20}}>{item.title}</Text>
         <Text style={{ alignSelf: "flex-start", fontSize:15, marginLeft:'30%',marginTop:20}}>{item.DD}{item.CC}</Text>
@@ -95,7 +96,7 @@ export class StrategyPage extends Component {
                                 }}> 
                             <Picker
                                 selectedValue={this.state.value}
-                                style={{ height: 50, width: 150 }}
+                                style={{ height: 50, width: 150,elevation:3 }}
                                 onValueChange={(itemValue, itemIndex) => this.setState({value: itemValue})}
                                 >
                                 <Picker.Item label="RSI" value="RSI" />
@@ -160,7 +161,7 @@ export class StrategyPage extends Component {
                                 
                                 }}> 
                                 
-                                <Text style={{paddingTop:'15%'}}>Test Strategy</Text>
+                                <Text style={{paddingTop:'15%',elevation:3}}>Test Strategy</Text>
 
                             </View>
                     </View>
