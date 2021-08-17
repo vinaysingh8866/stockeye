@@ -6,6 +6,7 @@ import { Dimensions } from "react-native";
 export class PortfolioHeader extends Component {
     static wi = Dimensions.get('window').width;
     render() {
+
         return (
             <TouchableOpacity>
             <View style={{ 
@@ -75,6 +76,7 @@ export class PortfolioHeader extends Component {
             </View>
             </TouchableOpacity>
         )
+        
     }
 }
 

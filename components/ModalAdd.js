@@ -2,6 +2,11 @@ import React ,{Component,useState}from 'react'
 import { View, Text, Modal,TextInput, Button, StyleSheet, Dimensions, TouchableOpacity,  } from 'react-native'
 const { width } = Dimensions.get("window");
 
+const sendUpdateToparent = (childData) => {
+    props.parentCallBack(childData)
+  }
+
+
 
 
 export class ModalAdd extends Component {
@@ -9,10 +14,22 @@ export class ModalAdd extends Component {
         super(props);
         this.state = {
           isModalVisible:false,
+          text:""
         };
       }
+    onTrigger = (buy,value,sign) => {
+        this.props.parentCallback(buy,value,sign);
+        
+    }
     render() {
+
+        const setData = (vvalue) => {
+            this.setState({text:vvalue})
+            
+        };
+
         const toggleModalVisibility = () => {
+            this.onTrigger(true, "70",">")
             this.setState({isModalVisible:!this.state.isModalVisible})
             
         };
@@ -57,7 +74,7 @@ export class ModalAdd extends Component {
                 <View style={styles.viewWrapper}>
                     <View style={styles.modalView}>
                         <TextInput placeholder="Enter something..." 
-                                   value={this.state.inputValue} style={styles.textInput} 
+                                   value={this.state.text} onChangeText={text => setData(text)} style={styles.text} 
                                     />
                         <Button title="Close" onPress={toggleModalVisibility} />
                     </View>

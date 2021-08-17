@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
-import { Text, View, SafeAreaView, StyleSheet, Picker, Button, TouchableOpacity, Modal, TextInput, Alert, FlatList} from 'react-native'
+import { Text, View, SafeAreaView, StyleSheet,ScrollView , Picker, Button, TouchableOpacity, Modal, TextInput, Alert, FlatList} from 'react-native'
 import ModalAdd from '../components/ModalAdd';
-
+import uuid from 'react-native-uuid';
 const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -56,15 +56,37 @@ export class StrategyPage extends Component {
         this.state = {
           value: "MACD",
           isModalVisible:false,
-          text:"j;bnjn"
+          text:"",
+          databuy:[],
+          datasell:[{id:"1",title:"MACD",CC:1,DD:"<"},{id:"2",title:"MACD",CC:1,DD:"<"},{id:"3",title:"MACD",CC:1,DD:"<"}],
+          databuynum:3,
+          datasellnum:3
         };
         
       }
-      
-
-      
-    render() {
+    increaseBuy=()=>{
+      var number = parseInt(this.state.databuynum , 10 ) + 1;
+      const val = number
+      this.setState({databuynum:val.toString})
+    }
+    handleCallback = (buy,value,sign) =>{
+      if(buy){
+        this.increaseBuy()
+        const id = this.state.databuynum
+        var joined = this.state.databuy.concat([{id:id,title:this.state.value,CC:value,DD:sign}])
+        this.setState({databuy:joined})
         
+        this.setState({text:this.state.databuy.toString})
+      }   
+      else{
+
+      }
+    }
+    render() {
+
+        const updateData = (val) =>{
+            this.setState({text:val})
+        }
         return (
             <SafeAreaView>
                 <View style={styles.container}>
@@ -105,32 +127,38 @@ export class StrategyPage extends Component {
                             </View>
                         </View>
                     <View>
-                        <ModalAdd />
+                        <ModalAdd parentCallback = {this.handleCallback}/>
                     </View>
                 </View>
                 <View style={{flexDirection:'row', marginTop:20}}>
-                    <Text style={{width:'50%', textAlign:'center', fontSize:27}}>Buy</Text>
-                    <Text style={{width:'50%', textAlign:'center', fontSize:27}}>Sell</Text>
+                    <Text style={{width:'55%', textAlign:'center', fontSize:27}}>Buy</Text>
+                    <Text style={{width:'55%', textAlign:'center', fontSize:27}}>Sell</Text>
                 </View>
-                <View style={{flexDirection:'row'}}>
+                
+
+                <View style={{flexDirection:'row', height:'40%'}}>
+                  <ScrollView>
                     <FlatList
                     style={{marginLeft:'5%',paddingStart:10}}
                     //horizontal
                     //horizontal={true}
-                    data={DATA}
+                    data={this.state.databuy}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                     showsHorizontalScrollIndicator={false}
                     />
+                  </ScrollView>
+                  <ScrollView>
                     <FlatList
                     style={{marginLeft:'5%',paddingStart:10}}
                     //horizontal
                     //horizontal={true}
-                    data={DATAB}
+                    data={this.state.datasell}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
                     showsHorizontalScrollIndicator={false}
                     />
+                  </ScrollView>
                 </View>
                 <TouchableOpacity>
                     <View style={{ 

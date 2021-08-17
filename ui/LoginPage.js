@@ -142,8 +142,8 @@ export class LoginPage extends Component {
     signInWithGoogleAsync = async () => {
         try {
             const result = await Google.logInAsync({
-                behavior: 'web',
-                //androidClientId: 'YOUR_CLIENT_ID_HERE',
+                
+                //androidClientId: '532640532418-24a5j1m874ui8uaqdkcm1vcs9oskunk6.apps.googleusercontent.com',
                 iosClientId: '532640532418-8etm53k0oi3t8p5cv59jmlulgneb4is2.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             });
