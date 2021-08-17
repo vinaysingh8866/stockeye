@@ -1,5 +1,5 @@
  import React, {useState, useEffect, Component} from 'react';
- import ReactDOM from 'react-dom';
+
 import { Image, Text, StyleSheet, View, SafeAreaView,TouchableOpacity, Slider } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,6 +18,7 @@ import { firebaseConfig } from './config';
 import HomePage from './ui/HomePage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import StrategyPage from './ui/StrategyPage';
+import Learning from './ui/Learning';
 
 
 
@@ -44,6 +45,10 @@ const screenOptions = (route, color) => {
     case 'Portfolio':
       iconName = 'folder1';
       break;
+    case 'Learning':
+      iconName = 'book';
+      break;
+
     default:
       break;
   }
@@ -93,12 +98,6 @@ const myStyle = {
   shadowOpacity:0.09
 }
 
-
-
-
-
-
-
 export class Dash extends Component {
   render() {
     return (
@@ -145,8 +144,8 @@ export class Dash extends Component {
         <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Portfolio" component={Portfolio} />
         <Tab.Screen name="Strategy" component={StrategyPage} />
-
-      </Tab.Navigator>
+        <Tab.Screen name="Learning" component={Learning}/>
+        </Tab.Navigator>
       
     </NavigationContainer>
     
@@ -192,5 +191,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
 });
+
+
 export default App;
 
