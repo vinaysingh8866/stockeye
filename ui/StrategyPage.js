@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Text, View, SafeAreaView, StyleSheet,ScrollView , Picker, Button, TouchableOpacity, Modal, TextInput, Alert, FlatList} from 'react-native'
 import ModalAdd from '../components/ModalAdd';
+import { LineChart } from 'react-native-chart-kit'
 
 import uuid from 'react-native-uuid';
 
