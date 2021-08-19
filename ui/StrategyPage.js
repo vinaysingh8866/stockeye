@@ -5,6 +5,7 @@ import ModalAdd from '../components/ModalAdd';
 import uuid from 'react-native-uuid';
 
 import { LineChart } from 'react-native-chart-kit'
+import ModalStrategy from './ModalStrategy';
 
 const DATA = [
     {
@@ -48,8 +49,7 @@ const DATA = [
       </View>
     </View>
   </TouchableOpacity>
-  
-  //<TileSmall name={item.title}/>
+
   );
 
 
@@ -61,31 +61,48 @@ export class StrategyPage extends Component {
           value: "MACD",
           isModalVisible:false,
           text:"",
+          isStrategyVisible:false,
           databuy:[],
-          datasell:[{id:"1",title:"MACD",CC:1,DD:"<"},{id:"2",title:"MACD",CC:1,DD:"<"},{id:"3",title:"MACD",CC:1,DD:"<"}],
-          databuynum:3,
-          datasellnum:3
+          datasell:[],
+          databuynum:0,
+          datasellnum:0
         };
         
       }
-    increaseBuy=()=>{
+    increaseBuy=() => {
+
       var number = parseInt(this.state.databuynum , 10 ) + 1;
       const val = number
       this.setState({databuynum:val.toString})
+    
+    }
+    increaseSell=()=>{
+    
+      var number = parseInt(this.state.datasellnum , 10 ) + 1;
+      const val = number
+      this.setState({datasellnum:val.toString})
+    
     }
     handleCallback = (buy,value,sign) =>{
       if(buy){
+      
         this.increaseBuy()
         const id = this.state.databuynum
         var joined = this.state.databuy.concat([{id:id,title:this.state.value,CC:value,DD:sign}])
         this.setState({databuy:joined})
-        
         this.setState({text:this.state.databuy.toString})
+      
       }   
       else{
 
+        this.increaseSell()
+        const id = this.state.datasellnum
+        var joined = this.state.datasell.concat([{id:id,title:this.state.value,CC:value,DD:sign}])
+        this.setState({datasell:joined})
+      
       }
     }
+
     render() {
 
         const updateData = (val) =>{
@@ -164,39 +181,7 @@ export class StrategyPage extends Component {
                     />
                   </ScrollView>
                 </View>
-                <TouchableOpacity>
-                    <View style={{ 
-                                marginStart:'30%',
-                                marginTop:20,
-                                width:150,
-                                height:70,
-                                borderRadius:16,
-                                shadowColor:'black',
-                                shadowRadius:1,
-                                shadowOffset:{width:3, height:3},
-                                shadowOpacity:.1}
-
-                                }>
-
-                            <View style={{ 
-                                backgroundColor: 'pink', 
-                                //marginLeft:'5%', 
-                                width:'100%', 
-                                height:'100%', 
-                                borderRadius:16,
-                                shadowColor:'white',
-                                shadowRadius:1,
-                                shadowOffset:{width:-3, height:-3},
-                                shadowOpacity:3,
-                                alignItems:'center'
-                                
-                                }}> 
-                                
-                                <Text style={{paddingTop:'15%',elevation:3}}>Test Strategy</Text>
-
-                            </View>
-                    </View>
-                </TouchableOpacity>
+                <ModalStrategy />
                 
             
             </SafeAreaView>

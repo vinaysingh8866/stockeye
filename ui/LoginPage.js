@@ -3,12 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity} from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import firebase from 'firebase';
-import {LoadingScreen} from './LoadingScreen'
-
-
-
-
-
 
 
 const NameText = () => {

@@ -1,82 +1,72 @@
-import React ,{Component,useState}from 'react'
+import React, { Component } from 'react'
 import { View, Text, Modal,TextInput, Button, StyleSheet, Dimensions, TouchableOpacity, RadioButton, Picker } from 'react-native'
-
 const { width } = Dimensions.get("window");
 
-const sendUpdateToparent = (childData) => {
-    props.parentCallBack(childData)
-}
-
-
-
-
-export class ModalAdd extends Component {
-    constructor(props) {
+export class ModalPortfolio extends Component {
+    constructor(props)
+    {
         super(props);
-        this.state = {
-          isModalVisible:false,
-          text:"",
-          checked : "first",
-          value: "buy",
-          sign:""
+        this.state =
+        {
+            isModelVisible:false,
+            text:"",
+            value:"buy",
+            amount:""
         };
-      }
-
-    onTrigger = (buy,value,sign) => {
-        this.props.parentCallback(buy,value,sign);
     }
-    render() {
 
-        const setData = (vvalue) => {
-            this.setState({text:vvalue})
-            
+    onTrigger = (stockName,amount) =>
+    {
+        this.props.parentCallback(stockName,amount);
+    }
+    render()
+    {
+        const setData = (vvalue) => 
+        {
+        this.setState({text:vvalue})
         };
 
-        const setRadio = (vvalue) => {
-            this.setState({chcked:vvalue})
-            
+        
+        const setVal = (vvalue) =>
+        {
+            this.setState({amount:vvalue})
         };
-        const setVal = (vvalue) => {
-            this.setState({sign:vvalue})
-            
-        };
+
 
         const toggleModalVisibility = () => {
             if(this.state.isModalVisible){
-                if(this.state.value=='buy'){
-                    this.onTrigger(true, this.state.sign,this.state.text)
-                }
-                else{
-                    this.onTrigger(false, this.state.sign,this.state.text)
-                }
+                
+                    this.onTrigger(this.state.text,this.state.amount)
+                
             }
-            else{}
+            else{
+
+            }
             this.setState({isModalVisible:!this.state.isModalVisible})
         };
 
-        return (
+        return(
             <View>
 
-            <TouchableOpacity onPress={toggleModalVisibility}>
-                            <View style={{ 
-                                width:100,
-                                height:60,
-                                marginStart:60,
-                                marginTop:40,
-                                padding:4,
-                                width:90,
-                                borderRadius:16,
-                                shadowColor:'black',
-                                shadowRadius:1,
-                                shadowOffset:{width:3, height:3},
-                                shadowOpacity:.1}
-
-                                }>
-
-                                <View style={{ 
+                <TouchableOpacity onPress = {toggleModalVisibility}>
+                    <View style = {{
+                    width:100,
+                    height:60,
+                    marginStart:60,
+                    marginTop:40,
+                    padding:4,
+                    width:90,
+                    borderRadius:16,
+                    shadowColor:'black',
+                    shadowRadius:1,
+                    shadowOffset:{width:3, height:3},
+                    shadowOpacity:.1}
+                    
+                    }>
+                             <View style={{ 
                                     backgroundColor: 'pink', 
                                     //marginLeft:'5%', 
-                                    width:'100%', 
+                                  width:'100%', 
                                     height:'100%', 
                                     borderRadius:16,
                                     shadowColor:'white',
@@ -87,27 +77,36 @@ export class ModalAdd extends Component {
                                     }}> 
                                     <Text style={{paddingTop:15}}>ADD</Text>
                                 </View>
-                            
-                            </View>
 
-            </TouchableOpacity>
-            <Modal animationType="slide" 
+                    </View>
+                    
+                    </TouchableOpacity>
+
+                    <Modal animationType="slide" 
                    transparent visible={this.state.isModalVisible} 
                    presentationStyle="overFullScreen" 
                    onDismiss={toggleModalVisibility}>
                 <View style={styles.viewWrapper}>
                     <View style={styles.modalView}>
                         <View style={{flexDirection:'row'}}>
-                            <Text style={{paddingEnd:10, fontSize:30}}> Value </Text>
-                            <TextInput style={styles.text} value={this.state.sign} onChangeText={text => setVal(text)} placeholder="70"></TextInput>
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <Text style={{paddingEnd:10, fontSize:30}}>Sign</Text>
+                            
+                            <Text style={{paddingEnd:10, fontSize:30}}>Stocks Name</Text>
+
                             <TextInput placeholder=" < / > " 
                                     value={this.state.text} onChangeText={text => setData(text)} style={styles.text} 
                                         />
                         
                         </View>
+
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{paddingEnd:10, fontSize:30}}>Amount</Text>
+                            <TextInput placeholder=" < / > " 
+                                    value={this.state.amount} onChangeText={text => setVal(text)} style={styles.text} 
+                                        />
+                        </View>
+
+
+
                         <View style={{ 
                                 width:100,
                                 height:160,
@@ -120,28 +119,10 @@ export class ModalAdd extends Component {
                                 shadowOpacity:.1}
 
                                 }> 
-                                <Picker
-                                        selectedValue={this.state.value}
-                                        style={{ 
-                                            backgroundColor: 'pink', 
-                                            height:150,
-                                            borderRadius:16,
-                                            paddingBottom:160,
-                                            shadowColor:'white',
-                                            shadowRadius:1,
-                                            shadowOffset:{width:-3, height:-3},
-                                            shadowOpacity:3,
-                                            
-                                            }}
-                                        onValueChange={(itemValue, itemIndex) => this.setState({value: itemValue})}
-                                        >
-                                        <Picker.Item label="Buy" value="buy" />
-                                        <Picker.Item label="Sell" value="sell" />
-                                </Picker>
-                        </View>
-                        
 
-                        <View style={{ 
+           </View>
+
+           <View style={{ 
                                 width:100,
                                 height:60,
                                 
@@ -179,10 +160,7 @@ export class ModalAdd extends Component {
     }
 }
 
-export default ModalAdd
-
-
-
+export default ModalPortfolio
 
 
 const styles = StyleSheet.create({
@@ -224,4 +202,11 @@ const styles = StyleSheet.create({
         height:39
     },
 });
+
+
+
+
+
+
+
 

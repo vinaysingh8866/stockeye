@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import { Text, View, SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import ModalPortfolio from '../components/ModalPortfolio'
 import {PortfolioHeader} from '../components/PortfolioHeader'
 import {Tile} from '../components/Tile'
 import {TileSmall} from '../components/TileSmall'
@@ -34,28 +35,10 @@ import {TileSmall} from '../components/TileSmall'
 // Redux Store 
 // Axios
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'APPL',
-    CC:100
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'GOOGL',
-    CC:100
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'IBM',
-    CC:100
-  },
-  {
-    id: '58694a1-471f-bd96-145571e29d72',
-    title: 'DiDi',
-    CC:100
-  },
-];
+const DATA = [{id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',title: 'APPL',CC:100},
+  {id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',title: 'GOOGL',CC:100},
+  {id: '58694a0f-3da1-471f-bd96-145571e29d72',title: 'IBM',CC:100},
+  {id: '58694a1-471f-bd96-145571e29d72',title: 'DiDi',CC:100}];
 
 const renderItem = ({ item }) => (
 
@@ -75,27 +58,54 @@ const renderItem = ({ item }) => (
   
 
 export class Portfolio extends Component {
+
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        value: "MACD",
+        isModalVisible:false,
+        dataStocks:[],
+        numList:"1"
+      };
+    }
   
+    increaseList=()=>{
+    
+      var number = parseInt(this.state.numList , 10 ) + 1;
+      const val = number
+      this.setState({numList:val.toString})
+    
+    }
+    handleCallback = (stockName,amount) =>{
+    
+        this.increaseList()
+        const id = this.state.numList
+        var joined = this.state.dataStocks.concat([{id:id,title:stockName,CC:amount}])
+        this.setState({dataStocks:joined})
+      }
+    
+    
     render() {
         return (
             <SafeAreaView style={{backgroundColor:'#F2F0F0'}}>
                 <PortfolioHeader/>
                 <View style={{flexDirection: "row",flexWrap: "wrap",}}>
                 <Text style={{flex:1,textAlign:'center', fontSize:25, fontWeight:'bold', marginLeft:40}}>My Stocks</Text>
-                <TouchableOpacity >
+                {/* <TouchableOpacity >
                   <View style={{width:40,height:20,backgroundColor:'#F2F0F0', marginBottom:10,marginRight:10,borderRadius:16,shadowColor:'black',shadowRadius:1,shadowOffset:{width:3, height:3},shadowOpacity:.1}}>
                     <View style={{width:'100%',height:'100%',backgroundColor:'#F2F0F0',borderRadius:16, shadowColor:'white',shadowRadius:1,shadowOffset:{width:-3, height:-3},shadowOpacity:3}}>
                       <Text style={{textAlign:'center'}}>+</Text>
                     </View>
                   </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <ModalPortfolio parentCallback = {this.handleCallback}/>
                 </View>
-                
                 <FlatList
                   style={{marginLeft:'5%'}}
                   //horizontal
                   //horizontal={true}
-                  data={DATA}
+                  data={this.state.dataStocks}
                   renderItem={renderItem}
                   keyExtractor={item => item.id}
                   showsHorizontalScrollIndicator={false}
