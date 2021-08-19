@@ -5,6 +5,7 @@ import {Tile} from '../components/Tile'
 import {TileSmall} from '../components/TileSmall'
 import {TabTile} from '../components/TabTile'
 import { LineChart } from 'react-native-chart-kit'
+import { SmallTileGraph } from '../components/SmallTileGraph'
 const DATA = [
     {
       id: '1',
@@ -155,6 +156,8 @@ const HomePage = () => {
                 
                 <Text style={styles.headingText}>Patterns Detected</Text>
                 <Tile/>
+                <Graph  ModelGraph = {this.handleCallback}/>
+                <SmallTileGraph SmallTileGraph = {this.handleCallback}/>
                   
                 <View>
                 <FlatList
